@@ -227,24 +227,12 @@ export default function Home() {
 
             <div className="flex justify-center mt-8 flex-wrap gap-6 text-lg">
               <a
-                href={`mailto:${portfolioData.contact.email}`}
-                className="flex items-center hover:text-blue-200 transition-all duration-300 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm"
-              >
-                <FaEnvelope className="mr-2" /> Email
-              </a>
-              <a
                 href={portfolioData.resume}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center hover:text-blue-200 transition-all duration-300 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm"
               >
                 <FaDownload className="mr-2" /> Resume
-              </a>
-              <a
-                href={`tel:${portfolioData.contact.phone}`}
-                className="flex items-center hover:text-blue-200 transition-all duration-300 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm"
-              >
-                <FaPhone className="mr-2" /> Phone
               </a>
               <a
                 href={portfolioData.contact.linkedin}
@@ -521,7 +509,19 @@ export default function Home() {
 
           {/* ===== Footer ===== */}
           <footer className="bg-gray-100 dark:bg-gray-800 text-center py-8 text-gray-600 dark:text-gray-300 text-sm border-t border-gray-200 dark:border-gray-700">
-            © {new Date().getFullYear()} {portfolioData.name}. All rights reserved.
+            <div className="max-w-4xl mx-auto px-6">
+              <div className="mb-4 space-y-2">
+                <p className="flex items-center justify-center gap-2">
+                  <FaEnvelope className="text-blue-600 dark:text-blue-400" />
+                  Email: {portfolioData.contact.email}
+                </p>
+                <p className="flex items-center justify-center gap-2">
+                  <FaPhone className="text-blue-600 dark:text-blue-400" />
+                  Phone: {portfolioData.contact.phone}
+                </p>
+              </div>
+              <p>© {new Date().getFullYear()} {portfolioData.name}. All rights reserved.</p>
+            </div>
           </footer>
         </div>
       </div>
