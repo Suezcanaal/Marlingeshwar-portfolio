@@ -80,7 +80,7 @@ export default function Home() {
     localStorage.setItem('darkMode', JSON.stringify(newMode));
   };
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setNavOpen(false);
   };
