@@ -95,7 +95,10 @@ export default function Home() {
         {/* Side Navigation */}
         <nav className={`fixed left-0 top-0 h-full w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 z-40 ${navOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
           <div className="p-6">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">Navigation</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+              <FaBars className="mr-3 text-blue-600 dark:text-blue-400" /> 
+              Sections
+            </h3>
             <ul className="space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
