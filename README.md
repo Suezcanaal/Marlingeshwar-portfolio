@@ -22,7 +22,7 @@ Showcases professional experience, projects, education, certifications, skills, 
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/Suezcanaal/hemanth_portfolio.git
+git clone https://github.com/Suezcanaal/Marlingeshwar-portfolio.git
 cd hemanth_portfolio
 ```
 
