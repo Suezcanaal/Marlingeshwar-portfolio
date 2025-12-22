@@ -30,6 +30,7 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
@@ -37,6 +38,30 @@ export default function Home() {
     if (savedMode !== null) {
       setDarkMode(JSON.parse(savedMode));
     }
+    
+    // Minimum loading time of 0.5 seconds
+    const minLoadTime = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+    
+    // If page takes longer to load, keep skeleton until ready
+    const checkReady = () => {
+      if (document.readyState === 'complete') {
+        clearTimeout(minLoadTime);
+        setTimeout(() => setLoading(false), 500);
+      }
+    };
+    
+    if (document.readyState === 'complete') {
+      checkReady();
+    } else {
+      window.addEventListener('load', checkReady);
+    }
+    
+    return () => {
+      clearTimeout(minLoadTime);
+      window.removeEventListener('load', checkReady);
+    };
   }, []);
 
   useEffect(() => {
@@ -73,8 +98,52 @@ export default function Home() {
     { id: 'connect', label: 'Connect', icon: FaCode },
   ];
 
-  if (!mounted) {
-    return null;
+  if (!mounted || loading) {
+    return (
+      <div className={darkMode ? 'dark' : ''}>
+        <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-sans">
+          {/* Loading Skeleton */}
+          <div className="animate-pulse">
+            {/* Header Skeleton */}
+            <div className="bg-blue-600 dark:bg-slate-800 py-16">
+              <div className="text-center">
+                <div className="w-32 h-32 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-6"></div>
+                <div className="h-12 bg-gray-300 dark:bg-gray-600 rounded w-96 mx-auto mb-4"></div>
+                <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-64 mx-auto mb-2"></div>
+                <div className="h-5 bg-gray-300 dark:bg-gray-600 rounded w-80 mx-auto mb-8"></div>
+                <div className="flex justify-center gap-4 flex-wrap">
+                  {[...Array(7)].map((_, i) => (
+                    <div key={i} className="h-10 bg-gray-300 dark:bg-gray-600 rounded-full w-24"></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Content Skeleton */}
+            <div className="max-w-6xl mx-auto px-6 py-16 space-y-16">
+              {[...Array(6)].map((_, sectionIndex) => (
+                <div key={sectionIndex}>
+                  <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-48 mb-6"></div>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {[...Array(4)].map((_, cardIndex) => (
+                      <div key={cardIndex} className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl">
+                        <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-3"></div>
+                        <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/2 mb-4"></div>
+                        <div className="space-y-2">
+                          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-full"></div>
+                          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-5/6"></div>
+                          <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-4/5"></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
