@@ -23,7 +23,7 @@ Showcases professional experience, projects, education, certifications, skills, 
 
 ```bash
 git clone https://github.com/Suezcanaal/Marlingeshwar-portfolio.git
-cd hemanth_portfolio
+
 ```
 
 ### 2. Install dependencies
